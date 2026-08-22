@@ -9,8 +9,7 @@ pipeline {
         // Creates a dropdown selection in the Jenkins UI
         choice(
             name: 'environment', 
-            choices: ['qa', 'uat'], 
-            defaultValue: 'uat',
+            choices: ['uat', 'qa'], 
             description: 'Select the environment to run the scripts.'
         )
         string(
@@ -21,7 +20,6 @@ pipeline {
         choice(
             name: 'browser', 
             choices: ['chromium', 'chrome', 'edge'], 
-            defaultValue: 'chromium',
             description: 'Select the desired browser to execute.'
         )
         string(
