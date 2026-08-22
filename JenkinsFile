@@ -1,21 +1,27 @@
 pipeline {
     agent any
 
+    triggers {
+        cron('H * * * *')
+    }
+
     parameters {
         // Creates a dropdown selection in the Jenkins UI
         choice(
             name: 'environment', 
             choices: ['qa', 'uat'], 
+            defaultValue: 'uat'
             description: 'Select the environment to run the scripts.'
         )
         string(
             name: 'test_suite', 
-            // choices: ['@smoke', '@regression'], 
+            defaultValue: '@smoke',
             description: 'Input the test tag to execute the desired suites/story.'
         )
         choice(
             name: 'browser', 
             choices: ['chromium', 'chrome', 'edge'], 
+            defaultValue: 'chromium',
             description: 'Select the desired browser to execute.'
         )
         string(
