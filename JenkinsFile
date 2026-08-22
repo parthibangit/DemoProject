@@ -10,7 +10,7 @@ pipeline {
         choice(
             name: 'environment', 
             choices: ['qa', 'uat'], 
-            defaultValue: 'uat'
+            defaultValue: 'uat',
             description: 'Select the environment to run the scripts.'
         )
         string(
