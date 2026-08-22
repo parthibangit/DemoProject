@@ -66,7 +66,7 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: false,
+    headless: true,
     /* Each action take 3 second to perform */
     // actionTimeout: 3000,
     /* Each navigation takes 8 seconds */
