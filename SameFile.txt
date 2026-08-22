@@ -1,0 +1,49 @@
+
+
+
+import {test, expect, request} from '@playwright/test';
+
+test.use({
+
+   ignoreHTTPSErrors: true
+
+});
+
+test('Basic API test to fetch customer information', {tag: '@fetch'}, async({request}) => {
+     
+
+     // Action of the test - Sending get request
+     // ========================================
+     const customerResponse = await request.get('URL', 
+                headers: {
+                'Authorization': 'Bearer token',
+                'Content-type': 'application/json'     
+                });
+
+     // Parsing the response
+     const parsedCustomerResponse = customerResponse.json();
+     console.log(JSON.Stringify(parsedCustomerResponse, null, 2));
+     expect(parsedCustomerResponse.customerInfo[0].customerName).toBe('Parthiban');
+     expect(parsedCustomerResponse.customerName).toBe('Parthiban');
+     
+
+     // verify outcome of action step
+     // ===============================
+     await expect(customerResponse.status()).toBe(200);
+    
+});
+
+test('Block the request to simulate the API failure', {tag: '@failure'}, async({request}) => {
+     
+     
+     await page.route('**/path', async(route) => {
+
+         await route.abort('timedout');
+         await route.fulfill({
+            status: 500,
+            contentType: 'application/json',
+            body: JSON.Stringify({ message: 'Internal Server Error...' })
+         });
+     });
+    
+});

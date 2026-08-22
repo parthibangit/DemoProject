@@ -1,0 +1,6 @@
+{
+  "successMessage": {
+    "login": "User has logged in successfully!!",
+    "logout": "User has logged out successfully!!"
+  }
+}

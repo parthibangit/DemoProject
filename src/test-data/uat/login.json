@@ -1,0 +1,14 @@
+ [
+    {
+      "username": "invalidUser1@gmail.com",
+      "password": "invalidPassword1"
+    },
+    {
+      "username": "invalidUser2@gmail.com",
+      "password": "invalidPassword2"
+    },
+    {
+      "username": "invalidUser3@gmail.com",
+      "password": "invalidPassword3"
+    }
+  ]
