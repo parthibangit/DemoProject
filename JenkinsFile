@@ -78,9 +78,9 @@ pipeline {
                 script {
                     try {
                         if (isUnix()) {
-                            sh "npm run test:${params.environment} -- --grep '${params.test_suite}' --project=${params.browser} --reporter=list,html"
+                            sh "npm run test:${params.environment} -- --grep '${params.test_suite}' --project=${params.browser}"
                         } else {
-                            bat "npm run test:${params.environment} -- --grep \"${params.test_suite}\" --project=${params.browser} --reporter=list,html"
+                            bat "npm run test:${params.environment} -- --grep \"${params.test_suite}\" --project=${params.browser}"
                         }
                     } catch (err) {
                         currentBuild.result = 'FAILURE'
