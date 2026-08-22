@@ -10,7 +10,7 @@ pipeline {
         )
         choice(
             name: 'test_suite', 
-            choices: ['@smoke', '@regression'], 
+            // choices: ['@smoke', '@regression'], 
             description: 'Select the test tag execution scope.'
         )
         choice(
