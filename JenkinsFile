@@ -8,10 +8,10 @@ pipeline {
             choices: ['qa', 'uat'], 
             description: 'Select the environment to run the scripts.'
         )
-        choice(
+        string(
             name: 'test_suite', 
             // choices: ['@smoke', '@regression'], 
-            description: 'Select the test tag execution scope.'
+            description: 'Input the test tag to execute the desired suites/story.'
         )
         choice(
             name: 'browser', 
