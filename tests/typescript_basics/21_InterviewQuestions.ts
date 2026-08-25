@@ -226,3 +226,15 @@ function reverseAWordsInSentence(sentence: string): string {
 }
 
 console.log('Reverse a sentence: ', reverseAWordsInSentence('This is Parthiban subburam'));
+
+function convertToCamelCase(value: string): string {
+
+    return value.split(' ')
+        .map(word => {
+            if(word.charAt(0) === word.charAt(0).toUpperCase()) return word;
+            return word.substring(0, 1).toUpperCase().concat(word.substring(1))
+        })
+        .join(' ')
+};
+console.log('Converted to camel case value is: ', convertToCamelCase('this is Parthiban subburam ...'));
+

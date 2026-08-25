@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('H * * * *')
-    }
+    // triggers {
+    //     cron('H * * * *')
+    // }
 
     parameters {
         // Creates a dropdown selection in the Jenkins UI
