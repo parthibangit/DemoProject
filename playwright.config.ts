@@ -13,9 +13,9 @@ import { fetchAuthJsonFile } from './src/utils/fileUtils';
 // Read the ENV variable from the CLI, default to 'uat' if none is provided
 const environment = process.env.ENV || 'uat';
 
-dotenv.config({ 
-    path: `./environments/${environment}/.env.${environment}`,
-  });
+dotenv.config({
+  path: `./environments/${environment}/.env.${environment}`,
+});
 
 
 // Helper function to wipe the directory contents safely
@@ -75,7 +75,7 @@ export default defineConfig({
   /* default time out is 30_000ms(30s), per our need we can customise */
   timeout: 40_000,
   /* default time out is 5000ms(5s), per our need we can customise */
-  expect: { timeout: 7000},
+  expect: { timeout: 7000 },
 
   /* Configure projects for major browsers */
   projects: [
@@ -115,30 +115,31 @@ export default defineConfig({
     },
     {
       name: 'chrome',
-      use: { ...devices['Desktop Chrome'], 
-        channel: 'chrome', 
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
         // 1. Disable the default 1280x720 viewport 
-        viewport: null, 
+        viewport: null,
         // block the notifications by default
-        permissions:[],    
+        permissions: [],
         // Add a delay in milliseconds between each operation (e.g., 500ms)
         launchOptions: {
           slowMo: 1000,
           args: ['-start-maximized', '--deny-permission-prompts'],
-          },
+        },
         deviceScaleFactor: undefined,
         // Inject the pre-authenticated session state into every test
-        storageState: fetchAuthJsonFile()  
+        storageState: fetchAuthJsonFile()
       },
       // Ensure the 'setup' project finishes before this one starts
-      dependencies: ['setup'] 
+      dependencies: ['setup']
     },
 
     /* dedicated to API automation project. */
     {
       name: 'api-tests',
       testMatch: /apitests\/.*\.spec\.ts/,
-      use: { 
+      use: {
         baseURL: 'https://reqres.in',
         ignoreHTTPSErrors: true,
         /* handles the bearer token authentication */

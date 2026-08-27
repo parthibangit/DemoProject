@@ -2,7 +2,7 @@ import createRecordsJson from '../../src/api-objects/requestbody/CreateRecords.j
 import { CreateRecords } from '../../src/api-objects/pojo/requestpojo/CreateRecords.ts';
 import { CreateRecordResponseType } from '../../src/types/responseType.ts';
 import { CreateRecordResponseSchema } from '../../src/api-objects/pojo/responsepojo/CreateRecordsResponse.ts';
-import {test, expect} from '../../src/custom-fixtures/MergeFixtures';
+import { test, expect } from '../../src/custom-fixtures/MergeFixtures';
 import { listRecordQueryParam } from '../../src/types/queryParamType.ts';
 import { createRecordPayload } from '../../src/utils/payloadFactoryUtils.ts';
 
@@ -15,7 +15,7 @@ test.use({
     }
 });
 
-test('Create a record using json file and fetch it again', {annotation: {type: 'story', description: 'RE-6182'}, tag: "@create"}, async ({ request }) => {
+test('Create a record using json file and fetch it again', { annotation: { type: 'story', description: 'RE-6182' }, tag: "@create" }, async ({ request }) => {
 
     const recordsResponse = await request.post('https://reqres.in/api/collections/products/records?project_id=39033',
         {
@@ -53,10 +53,10 @@ test('Create record using pojo class and delete it', async ({ request }) => {
     createRecordPojoObj.setInStock = true;
 
     // Send post request to create a record using query param
-    const recordsResponse = await request.post('https://reqres.in/api/collections/products/records', 
-        { 
-          data: createRecordPojoObj.toJson(), 
-          params: { project_id: 39033 } 
+    const recordsResponse = await request.post('https://reqres.in/api/collections/products/records',
+        {
+            data: createRecordPojoObj.toJson(),
+            params: { project_id: 39033 }
         }
     );
 
@@ -84,13 +84,13 @@ test('Create record using pojo class and deserialise the response using zod vali
     createRecordPojoObj.setInStock = true;
 
     // Send post request to create a record using query param
-    const recordsResponse = await request.post('https://reqres.in/api/collections/products/records', 
-        { 
-          data: createRecordPojoObj.toJson(), 
-          params: { project_id: 39033 } 
+    const recordsResponse = await request.post('https://reqres.in/api/collections/products/records',
+        {
+            data: createRecordPojoObj.toJson(),
+            params: { project_id: 39033 }
         }
     );
-    
+
     // below zod parse will validate the response types and throw zod type error if there is any mismatching types
     const recordResponseBody = await recordsResponse.text();
     const parsedResponseSchema = CreateRecordResponseSchema.parse(JSON.parse(recordResponseBody));
@@ -98,7 +98,7 @@ test('Create record using pojo class and deserialise the response using zod vali
     expect(parsedResponseSchema.data.data.name).toEqual(createRecordPojoObj.getName);
 });
 
-test('Create record using service', {tag: "@postRecord"}, async ({ recordService }) => {
+test('Create record using service', { tag: "@postRecord" }, async ({ recordService }) => {
 
     // Pre-condition of the test - Setup data and query param
     const createRecordPojoObj = new CreateRecords();
@@ -107,23 +107,23 @@ test('Create record using service', {tag: "@postRecord"}, async ({ recordService
     createRecordPojoObj.setCategory = "Electronics";
     createRecordPojoObj.setInStock = true;
 
-    const queryParam:listRecordQueryParam = { project_id: 39033};
+    const queryParam: listRecordQueryParam = { project_id: 39033 };
 
 
     // Action of the test - sending post request
     const recordResponse = await recordService.createRecord(createRecordPojoObj.toJson(), queryParam);
-    
+
     // verify outcome of action step 
     const recordJsonResponse = await recordResponse.json();
     const parsedResponseSchema = CreateRecordResponseSchema.parse(recordJsonResponse);
     expect(parsedResponseSchema.data.data.name).toEqual(createRecordPojoObj.getName);
 });
 
-test('Create record and delete it using service', {tag: "@deleteRecord"}, async ({ recordService }) => {
+test('Create record and delete it using service', { tag: "@deleteRecord" }, async ({ recordService }) => {
 
     // Pre-condition of the test - Setup data and query param
-    const createRecordReq = createRecordPayload({in_stock: false});
-    const queryParam:listRecordQueryParam = { project_id: 39033};
+    const createRecordReq = createRecordPayload({ in_stock: false });
+    const queryParam: listRecordQueryParam = { project_id: 39033 };
 
 
     // Action of the test - sending post request
@@ -133,7 +133,7 @@ test('Create record and delete it using service', {tag: "@deleteRecord"}, async 
     const recordId = parsedResponseSchema.data.id;
 
     // Action of the test - sending delete request
-    const deleteResponse =  await recordService.deleteRecord(recordId, queryParam);
+    const deleteResponse = await recordService.deleteRecord(recordId, queryParam);
 
     // Verify outcome of delete action step
     expect(deleteResponse.status()).toBe(204);

@@ -1,9 +1,9 @@
 function reverseString(value: string): string {
 
     let revString = "";
-    let size = value.length-1;
+    let size = value.length - 1;
 
-    for(let i=size; i>=0; i--) {
+    for (let i = size; i >= 0; i--) {
         revString += value.charAt(i);
     }
     return revString;
@@ -13,7 +13,7 @@ console.log('Reversed string is:', reverseString('Parthiban'))
 // ==========================================================================================================================
 
 function countTheMaxCharOccurence(value: string): string {
-    
+
     // let insertValues = new Map<string, number>();
     // let size = value.length-1;
     let maxOccurChar = '';
@@ -42,13 +42,13 @@ function countTheMaxCharOccurence(value: string): string {
 
     const mapValues: Record<string, number> = {};
 
-    for(let char of value) {
+    for (let char of value) {
         mapValues[char] = (mapValues[char] || 0) + 1;
     }
 
     Object.entries(mapValues).forEach(([key, value]) => {
 
-        if(value > occur) {
+        if (value > occur) {
             maxOccurChar = key;
             occur = value;
         }
@@ -64,9 +64,9 @@ function findSmallestNumber(array: number[]): number {
 
     let min = array[0];
 
-    for(let i=1; i<array.length; i++) {
+    for (let i = 1; i < array.length; i++) {
 
-        if(array[i] < min) {
+        if (array[i] < min) {
             min = array[i];
         }
     }
@@ -79,7 +79,7 @@ console.log('Smallest number in given array is: ', findSmallestNumber([4, 7, 2, 
 function findSecondLargestNumber(numbers: number[]): number {
 
     let sortedArray = numbers.sort();
-    return sortedArray[numbers.length-1]
+    return sortedArray[numbers.length - 1]
 }
 console.log('Second largest value in given array is: ', findSecondLargestNumber([4, 7, 2, 8, 9, 1, 10]))
 
@@ -95,22 +95,22 @@ type Products = {
 
 function filterTheValue(productName: string, products: Products[]): any[] {
 
-   return products.filter(product => product.productName.includes(productName) && product.in_stock === true)
-                .map(product => ({productName: product.productName, price: product.price}));  // return the particular values from matching object
-                // .map(product =>product);                                                   // return whole product information
-}; 
+    return products.filter(product => product.productName.includes(productName) && product.in_stock === true)
+        .map(product => ({ productName: product.productName, price: product.price }));  // return the particular values from matching object
+    // .map(product =>product);                                                   // return whole product information
+};
 
-const productArrayObjects: Products[] = [                                                              
-  { id: "p1", productName: "Samsung Mobile", price: 250, category: 'Electronics', in_stock: true },
-  { id: "p2", productName: "Laptop", price: 800, in_stock: false, category: 'Electronics' },
-  { id: "p3", productName: "Samsung Cover", price: 350, in_stock: true, category: 'Household' }
+const productArrayObjects: Products[] = [
+    { id: "p1", productName: "Samsung Mobile", price: 250, category: 'Electronics', in_stock: true },
+    { id: "p2", productName: "Laptop", price: 800, in_stock: false, category: 'Electronics' },
+    { id: "p3", productName: "Samsung Cover", price: 350, in_stock: true, category: 'Household' }
 ];
 console.log('Available product details are: ', filterTheValue('Samsung', productArrayObjects))
 
 // ==========================================================================================================================
 
 function removeDuplicateValues(...values: string[]): Set<string> {
-    
+
     // let uniqueValues = [...new Set(array)];
     let uniqueValues = new Set(values)
     return uniqueValues;
@@ -120,8 +120,8 @@ console.log('Array after removing the duplicates: ', removeDuplicateValues('a', 
 // ===========================================================================================================================
 
 function removeDuplicateValuesFromString(value: string): string {
-    
-   return [...new Set(value)].join('')
+
+    return [...new Set(value)].join('')
 
 };
 console.log('Array after removing the duplicates: ', removeDuplicateValuesFromString('Parthiban'));
@@ -134,7 +134,7 @@ function transformTheValue(value: string): string {
     const updateChar = '*';
     let occurrenceCount = 0;
 
-   return value.split('')
+    return value.split('')
         .map((char) => {
             if (char === removeChar) {
                 occurrenceCount++;
@@ -180,16 +180,16 @@ console.log('Reversed number is?', isNumberPalindrome(-250))
 // =============================================================================================================================
 
 function isArmStrongNumber(value: number): boolean {
-   let sum = 0;
-   let temp = value;
-   
-   while (value> 0) {
+    let sum = 0;
+    let temp = value;
 
-     let lastDigit = value%10
-     sum = sum + lastDigit*lastDigit*lastDigit
-     value = Math.floor(value/10)
-   }
-   return sum === temp;
+    while (value > 0) {
+
+        let lastDigit = value % 10
+        sum = sum + lastDigit * lastDigit * lastDigit
+        value = Math.floor(value / 10)
+    }
+    return sum === temp;
 }
 console.log('is following number is armstrong?', isArmStrongNumber(120))
 
@@ -197,13 +197,13 @@ console.log('is following number is armstrong?', isArmStrongNumber(120))
 
 function factorial(value: number): number {
 
-    if (value <=0) return 0;
+    if (value <= 0) return 0;
 
     let sum: number = 1;
 
-    for(let i=value; i>0; i--) {
+    for (let i = value; i > 0; i--) {
         // sum *= i;
-        sum = sum*i;
+        sum = sum * i;
     }
     return sum;
 }
@@ -213,8 +213,8 @@ console.log('Factorial value is: ', factorial(5))
 
 function checkIfElementPresentInArray(values: (string | number)[], checkValue: (string | number)): boolean {
 
-//    return values.includes(checkValue);
-      return values.filter(value => value === checkValue).length > 0;
+    //    return values.includes(checkValue);
+    return values.filter(value => value === checkValue).length > 0;
 }
 console.log('Is element present in array: ', checkIfElementPresentInArray(['a', 'b', 'c'], 'd'));
 
@@ -231,10 +231,18 @@ function convertToCamelCase(value: string): string {
 
     return value.split(' ')
         .map(word => {
-            if(word.charAt(0) === word.charAt(0).toUpperCase()) return word;
+            if (word.charAt(0) === word.charAt(0).toUpperCase()) return word;
             return word.substring(0, 1).toUpperCase().concat(word.substring(1))
         })
         .join(' ')
 };
 console.log('Converted to camel case value is: ', convertToCamelCase('this is Parthiban subburam ...'));
 
+function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): number[] {
+
+    // return array1.filter(value => array2.includes(value));
+    const values = new Set<number>(array2);
+    return array1.filter(value => values.has(value));
+
+}
+console.log('Same elements in both arrays are: ', compareTwoArrayToFindSameElements([10, 7, 6, 2, 4], [2, 4, 5, 2, 10]));
