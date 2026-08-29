@@ -15,11 +15,12 @@ test.describe('Wait for URL, Load State, Selector, and navigation', () => {
     // we can pass values as 'load', 'domcontentloaded', and 'networkidle'
     await page.waitForLoadState('load');
 
-    // we can pass values as 'visible' and 'attached'
+    // we can pass values as 'visible', 'hidden', 'attached' and  'detached'
     await page.waitForSelector('name-input', {state:'visible'});
 
     // we can pass values as 'load', 'domcontentloaded', and 'networkidle'
     // await page.waitForNavigation('load');
+    
 });
 
 });

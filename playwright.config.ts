@@ -51,6 +51,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],
+    ['html', {open: 'never'}],
     ['allure-playwright', {
       resultsDir: 'reports/allure-results', // Folder where raw data is saved
       detail: true,                         // Captures step-by-step API actions

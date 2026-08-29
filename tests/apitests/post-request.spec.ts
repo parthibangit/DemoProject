@@ -2,7 +2,7 @@ import createRecordsJson from '../../src/api-objects/requestbody/CreateRecords.j
 import { CreateRecords } from '../../src/api-objects/pojo/requestpojo/CreateRecords.ts';
 import { CreateRecordResponseType } from '../../src/types/responseType.ts';
 import { CreateRecordResponseSchema } from '../../src/api-objects/pojo/responsepojo/CreateRecordsResponse.ts';
-import { test, expect } from '../../src/custom-fixtures/MergeFixtures';
+import { test, expect } from '../../src/custom-fixtures/MergeFixtures.ts';
 import { listRecordQueryParam } from '../../src/types/queryParamType.ts';
 import { createRecordPayload } from '../../src/utils/payloadFactoryUtils.ts';
 

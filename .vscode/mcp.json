@@ -7,6 +7,15 @@
         "playwright",
         "run-test-mcp-server"
       ]
+    },
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "mcp-jira-server"],
+      "env": {
+        "JIRA_BASE_URL": "https://parthiban-subburam.atlassian.net/",
+        "JIRA_API_TOKEN": "ATATT3xFfGF0k3r7kFNzFTW7T-KtNhV_IMHUxSq2_ZPOzME5vRtattF5EXsm3cpnQqAGnwA5XM3_AzOlATyNf5AJmghTwXAk33ZUAZoyxqf-OvHTwhEF1ep_MUxdsAdqPyBvtdw2WPvTiN5mWQsPfPvyVWjHwXMlabYDmJp50fMMMmfF6Cu5DVw=0EAF4E67",
+        "JIRA_USER_EMAIL": "parthiban_subburam@epam.com"
+      }
     }
   },
   "inputs": []
