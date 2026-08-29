@@ -1,11 +1,8 @@
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
-/downloads
 /screenshots
+/downloads
 /sampleAgents/.env
+/node_modules
