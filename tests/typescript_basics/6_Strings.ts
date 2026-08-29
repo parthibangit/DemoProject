@@ -34,16 +34,19 @@ console.log(splittedNames);
 const replacedName = userName.replace('m', '6');               // remove by replaced char
 console.log(replacedName);
 
-let testUser: string = "Parthiban subburam @123...";
+let testUser: string = "Parthiban  subburam @123...";
 
 const replacedStrings = testUser.replace(/[a-zA-Z0-9 ]/g, '');   // Remove all characters and numbers and leaving special characters.
 console.log(replacedStrings);
 
-const replacedNumbers = testUser.replace(/[0-9]/g, '');         // Remove all numbers and leaving characters and special characters.
+const replacedNumbers = testUser.replace(/[0-9]/g, '');          // Remove all numbers and leaving characters and special characters.
 console.log(replacedNumbers);
 
 const replacedSpecial = testUser.replace(/[^a-zA-Z0-9 ]/g, '');  // Remove all spcial characters only.
 console.log(replacedSpecial);
+
+const removeExtraSpace = testUser.replace(/\s+/g, ' ');          // Remove the extra white spaces between words
+console.log(removeExtraSpace);
 
 
 // built-in utility types
