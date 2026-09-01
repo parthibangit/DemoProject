@@ -1,0 +1,8 @@
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="6.4219170000000005">
+<testsuite name="automation_practice\tags.spec.ts" timestamp="2026-09-01T08:38:16.354Z" hostname="chromium" tests="2" failures="0" skipped="0" time="10.392" errors="0">
+<testcase name="Input fields test" classname="automation_practice\tags.spec.ts" time="5.169">
+</testcase>
+<testcase name="Checkbox selection" classname="automation_practice\tags.spec.ts" time="5.223">
+</testcase>
+</testsuite>
+</testsuites>
