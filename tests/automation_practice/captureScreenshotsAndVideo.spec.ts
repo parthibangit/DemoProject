@@ -1,4 +1,10 @@
-import {test, expect} from "@playwright/test";
+import {test} from "@playwright/test";
+
+test.use({
+
+  screenshot: 'on-first-failure',
+  video: 'retain-on-failure'
+})
 
 test('Take screenshot - Partial/Whole page', {tag: '@screenshot'}, async({ page }) => {
 

@@ -5,13 +5,13 @@ class MethodOverloading {
     fecthCapital(cityName: string, stateName?: string): string;
 
     // Implementation of those multiple signatures to achieve method overloading
-    fecthCapital(cityName: string, stateName?:string): string {
-          if(stateName == undefined) {
-             return `Capital name is ${cityName}`
-          }
-          else {
+    fecthCapital(cityName: string, stateName?: string): string {
+        if (stateName == undefined) {
+            return `Capital name is ${cityName}`
+        }
+        else {
             return `capital is part of ${cityName} and ${stateName}`
-          }
+        }
     };
 
     /* we can overload the static methods but difference is passing parameters */
@@ -19,12 +19,12 @@ class MethodOverloading {
     static findAge(age: number, ages?: number[]): number[];
 
     static findAge(age: number, ages?: number[]): number | number[] {
-       if(ages === undefined) {
-           return age;
-       }
-       else {
-         return ages;
-       }
+        if (ages === undefined) {
+            return age;
+        }
+        else {
+            return ages;
+        }
     }
 
 }
@@ -57,7 +57,7 @@ class ChildClass extends MethodOverriding {
     // redefining or shadowing the parent class static method.
     static printname(name: string): void {
         console.log('Branch user name is: ', name)
-    } 
+    }
 }
 
 const obj = new ChildClass();

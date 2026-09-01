@@ -2,7 +2,7 @@ abstract class UserProfile {
 
     readonly role: string;
     subRole?: string | undefined;
-    name: string;
+    private name: string;
 
     constructor(name: string, role: string, subRole?: string | undefined) {
         this.name = name;
@@ -29,7 +29,7 @@ class ImplementAbstract extends UserProfile {
     };
 
     printName(): void {                                       // Implemented in child class
-        console.log(this.name);
+        console.log(this.fetchName());
     };
 };
 

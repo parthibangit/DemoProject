@@ -55,7 +55,7 @@ test('Drop down selection', async({ page }) => {
   // Select the value by value 
   await page.getByTestId('automation').selectOption({value: 'yes'});
 
-    // Select the value by label 
+    // Select the value by index 
   await page.getByTestId('automation').selectOption({index: 0});
 
   // Select multi values in drop down

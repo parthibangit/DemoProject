@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 // default - Opts out of global parallelization; runs sequentially
 // retries - Failed tests will run once again
 // timeout - Each test has 5 seconds timeout
-test.describe.configure({mode: 'parallel', retries: 1, timeout: 5000});
+test.describe.configure({ mode: 'parallel', retries: 1, timeout: 5000 });
 
 test('Block the request to simulate the API error', { tag: "@network" }, async ({ page }) => {
 
@@ -28,13 +28,14 @@ test('Simulate the 500 error', { tag: "@network" }, async ({ page }) => {
 
         await route.fulfill({
             status: 403,
-            contentType: 'application/json',
-            body: JSON.stringify({ message: '403 / Access Denied' })
+            contentType: 'text/html',
+            // body: JSON.stringify({message: '403 / Access Denied'}),
+            body: '<html><body><h1>403 / Access Denied</h1></body></html>'
         });
     });
 
     await page.goto('https://practice-automation.com/form-fields/');
 
-    // verify checkbox is hidden
-    await expect(page.locator("//input[@type='checkbox']")).toBeHidden();
+    // verify the access denied message is displayed
+    await expect(page.getByRole('heading', { name: '403 / Access Denied' })).toBeVisible();
 });

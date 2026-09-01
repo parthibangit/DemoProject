@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "test-report-analyzer": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "tsx",
+        "sampleAgents/mcp-server.ts"
+      ]
+    }
+  },
+  "inputs": []
+}

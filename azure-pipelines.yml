@@ -1,0 +1,55 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - azure-pipelines
+
+pool:
+  vmImage: 'ubuntu-latest' # Standard, fast Linux VM provided by Azure
+
+steps:
+  # 0. Cache npm dependencies
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      path: $(npm_config_cache)
+    displayName: 'Cache npm dependencies'
+  # 1. Install Node.js
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  # 2. Install Project Dependencies
+  - script: npm ci
+    displayName: 'Install NPM Dependencies'
+
+  # 3. Install Playwright Browsers and System Dependencies
+  - script: npx playwright install --with-deps
+    displayName: 'Install Playwright Browsers and Dependencies'
+
+  # 4. Run the Playwright Tests
+  - script: npx playwright test --grep '@smoke' --project=chromium --reporter=junit
+    displayName: 'Execute Playwright Tests'
+    env:
+      CI: true
+
+  # 5. Publish Test Results
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'test-results/results.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      failTaskOnFailedTests: true
+    condition: always()
+    displayName: 'Publish Test Results to Azure DevOps'
+
+  # # 6. Publish HTML Report
+  # - task: PublishHtmlReport@1 # Requires the HTML Report Viewer extension, or use PublishPipelineArtifact
+  #   inputs:
+  #     reportDir: 'playwright-report'
+  #     tabName: 'Playwright Test Report'
+  #   condition: always()
+  #   displayName: 'Publish Playwright Report'
