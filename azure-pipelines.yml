@@ -46,10 +46,10 @@ steps:
     condition: always()
     displayName: 'Publish Test Results to Azure DevOps'
 
-  # 6. Publish HTML Report
-  - task: PublishHtmlReport@1 # Requires the HTML Report Viewer extension, or use PublishPipelineArtifact
-    inputs:
-      reportDir: 'playwright-report'
-      tabName: 'Playwright Test Report'
-    condition: always()
-    displayName: 'Publish Playwright Report'
+  # # 6. Publish HTML Report
+  # - task: PublishHtmlReport@1 # Requires the HTML Report Viewer extension, or use PublishPipelineArtifact
+  #   inputs:
+  #     reportDir: 'playwright-report'
+  #     tabName: 'Playwright Test Report'
+  #   condition: always()
+  #   displayName: 'Publish Playwright Report'
