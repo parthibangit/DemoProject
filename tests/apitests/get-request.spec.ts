@@ -1,4 +1,4 @@
-import {test, expect} from '../../src/custom-fixtures/MergeFixtures';
+import {test, expect} from '../../src/custom-fixtures/MergeFixtures.ts';
 import { listRecordQueryParam } from '../../src/types/queryParamType.ts';
 
 // It will ignore the https certificate issues only for this file tests.

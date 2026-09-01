@@ -1,0 +1,162 @@
+pipeline {
+    agent any
+
+    // triggers {
+    //     cron('H * * * *')
+    // }
+
+    parameters {
+        // Creates a dropdown selection in the Jenkins UI
+        choice(
+            name: 'environment', 
+            choices: ['uat', 'qa'], 
+            description: 'Select the environment to run the scripts.'
+        )
+        string(
+            name: 'test_suite', 
+            defaultValue: '@smoke',
+            description: 'Input the test tag to execute the desired suites/story.'
+        )
+        choice(
+            name: 'browser', 
+            choices: ['chromium', 'chrome', 'edge'], 
+            description: 'Select the desired browser to execute.'
+        )
+        string(
+            name: 'email_recipients',
+            defaultValue: 'sarathipartha04@gmail.com',
+            description: 'Email recipients for test report (comma-separated)'
+        )
+    }
+
+    tools {
+        nodejs 'NodeJS' 
+    }
+
+    environment {
+        PLAYWRIGHT_BROWSERS_PATH = "${WORKSPACE}/.cache/ms-playwright"
+
+        // // Non-sensitive configuration variables
+        // TEST_URL = 'https://example.com'
+        // TEST_USER = 'jenkins_automation_user'
+
+        // // Securely pulling sensitive passwords from Jenkins Credentials Provider
+        // TEST_PASSWORD = credentials('TEST_PASSWORD')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'npm ci'
+                    } else {
+                        bat 'npm ci'
+                    }
+                }
+            }
+        }
+
+        stage('Install Playwright') {
+            steps {
+                script {
+                    def browserToInstall = params.browser == 'edge' ? 'msedge' : params.browser
+
+                    if (isUnix()) {
+                        sh "npx playwright install --with-deps ${browserToInstall}"
+                    } else {
+                        bat "npx playwright install --with-deps ${browserToInstall}"
+                    }
+                }
+            }
+        }
+
+        stage('Run Playwright Tests') {
+            steps {
+                script {
+                    try {
+                        if (isUnix()) {
+                            sh "npm run test:${params.environment} -- --grep '${params.test_suite}' --project=${params.browser}"
+                        } else {
+                            bat "npm run test:${params.environment} -- --grep \"${params.test_suite}\" --project=${params.browser}"
+                        }
+                    } catch (err) {
+                        currentBuild.result = 'FAILURE'
+                        throw err
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                try {
+                    if (isUnix()) {
+                        sh 'npm run allure:generate'
+                    } else {
+                        bat 'npm run allure:generate'
+                    }
+                } catch (err) {
+                    echo "Allure report generation failed: ${err.getMessage()}"
+                    currentBuild.result = 'UNSTABLE'
+                }
+
+                archiveArtifacts artifacts: 'reports/allure-report/**', allowEmptyArchive: true
+                publishHTML(target: [
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'reports/allure-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Allure Report'
+                ])
+
+                // 3. Define your target recipient distribution list
+                def emailRecipients = params.email_recipients ?: "sarathipartha04@gmail.com"
+                
+                // 4. Construct a dynamic, styled email template
+                try {
+                    emailext (
+                    to: emailRecipients,
+                    subject: "Playwright Automation Status: ${currentBuild.currentResult} - Build #${currentBuild.number}",
+                    body: """
+                        <html>
+                        <body style="font-family: Arial, sans-serif; color: #333;">
+                            <h2 style="color: ${currentBuild.currentResult == 'SUCCESS' ? '#2e7d32' : '#c62828'};">
+                                Playwright Test Suite Status: ${currentBuild.currentResult}
+                            </h2>
+                            <p><b>Job Profile:</b> ${env.JOB_NAME}</p>
+                            <p><b>Build Number:</b> #${currentBuild.number}</p>
+                            <p><b>Target Scope Flag:</b> ${params.test_suite}</p>
+                            <hr style="border: 0; border-top: 1px solid #ccc;"/>
+                            <p>The interactive test suite results have been attached to this email as a compressed ZIP folder.</p>
+                                     <p>Alternatively, you can view the complete dashboard directly within the pipeline framework: 
+                                         <a href="${env.BUILD_URL}Allure_20Report/">Open Allure Report</a>
+                            </p>
+                            <br/>
+                            <p style="font-size: 11px; color: #777;">Automated message sent by Jenkins server daemon.</p>
+                        </body>
+                        </html>
+                    """,
+                    mimeType: 'text/html',
+                    attachmentsPattern: 'reports/allure-report/index.html'
+                )
+                echo "Mail sent to the ${emailRecipients}."
+                }
+                catch (err) {
+                echo "Mail sending failed: ${err.getMessage()}"
+                currentBuild.result = 'UNSTABLE'
+            }
+                
+            }
+        }
+    }
+}

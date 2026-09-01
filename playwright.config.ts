@@ -13,9 +13,9 @@ import { fetchAuthJsonFile } from './src/utils/fileUtils';
 // Read the ENV variable from the CLI, default to 'uat' if none is provided
 const environment = process.env.ENV || 'uat';
 
-dotenv.config({ 
-    path: `./environments/${environment}/.env.${environment}`,
-  });
+dotenv.config({
+  path: `./environments/${environment}/.env.${environment}`,
+});
 
 
 // Helper function to wipe the directory contents safely
@@ -41,17 +41,17 @@ clearDirectory(reportDir);
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 3 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],
-    ['html', {open: 'on-failure'}],
+    ['html', {open: 'never'}],
     ['allure-playwright', {
       resultsDir: 'reports/allure-results', // Folder where raw data is saved
       detail: true,                         // Captures step-by-step API actions
@@ -67,7 +67,7 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: false,
+    headless: true,
     /* Each action take 3 second to perform */
     // actionTimeout: 3000,
     /* Each navigation takes 8 seconds */
@@ -76,7 +76,7 @@ export default defineConfig({
   /* default time out is 30_000ms(30s), per our need we can customise */
   timeout: 40_000,
   /* default time out is 5000ms(5s), per our need we can customise */
-  expect: { timeout: 7000},
+  expect: { timeout: 7000 },
 
   /* Configure projects for major browsers */
   projects: [
@@ -116,30 +116,31 @@ export default defineConfig({
     },
     {
       name: 'chrome',
-      use: { ...devices['Desktop Chrome'], 
-        channel: 'chrome', 
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
         // 1. Disable the default 1280x720 viewport 
-        viewport: null, 
+        viewport: null,
         // block the notifications by default
-        permissions:[],    
+        permissions: [],
         // Add a delay in milliseconds between each operation (e.g., 500ms)
         launchOptions: {
           slowMo: 1000,
           args: ['-start-maximized', '--deny-permission-prompts'],
-          },
+        },
         deviceScaleFactor: undefined,
         // Inject the pre-authenticated session state into every test
-        storageState: fetchAuthJsonFile()  
+        storageState: fetchAuthJsonFile()
       },
       // Ensure the 'setup' project finishes before this one starts
-      dependencies: ['setup'] 
+      dependencies: ['setup']
     },
 
     /* dedicated to API automation project. */
     {
       name: 'api-tests',
       testMatch: /apitests\/.*\.spec\.ts/,
-      use: { 
+      use: {
         baseURL: 'https://reqres.in',
         ignoreHTTPSErrors: true,
         /* handles the bearer token authentication */
