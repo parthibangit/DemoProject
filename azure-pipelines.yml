@@ -4,12 +4,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  - main # Triggers the pipeline automatically when code changes on the current branch
+  - azure-pipelines
 
 pool:
   vmImage: 'ubuntu-latest' # Standard, fast Linux VM provided by Azure
 
 steps:
+  # 0. Cache npm dependencies
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      path: $(npm_config_cache)
+    displayName: 'Cache npm dependencies'
   # 1. Install Node.js
   - task: NodeTool@0
     inputs:
@@ -25,12 +31,22 @@ steps:
     displayName: 'Install Playwright Browsers and Dependencies'
 
   # 4. Run the Playwright Tests
-  - script: npx playwright test --grep '@smoke' --project=chromium
+  - script: npx playwright test --grep '@smoke' --project=chromium --reporter=junit
     displayName: 'Execute Playwright Tests'
     env:
-      CI: 'true' # Tells Playwright it is running in a CI environment
+      CI: true
 
-  # 5. Publish Test Results and Reports (Runs even if tests fail)
+  # 5. Publish Test Results
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'test-results/results.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      failTaskOnFailedTests: true
+    condition: always()
+    displayName: 'Publish Test Results to Azure DevOps'
+
+  # 6. Publish HTML Report
   - task: PublishHtmlReport@1 # Requires the HTML Report Viewer extension, or use PublishPipelineArtifact
     inputs:
       reportDir: 'playwright-report'

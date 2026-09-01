@@ -1,6 +1,5 @@
 
 # Playwright
-/test-results/
 /screenshots
 /downloads
 /sampleAgents/.env
