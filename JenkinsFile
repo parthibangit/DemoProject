@@ -109,7 +109,13 @@ pipeline {
                     currentBuild.result = 'UNSTABLE'
                 }
 
-                archiveArtifacts artifacts: 'reports/allure-report/**', allowEmptyArchive: true
+                junit(
+                    testResults: 'test-results/results.xml',
+                    allowEmptyResults: false
+                )
+
+                archiveArtifacts artifacts: 'test-results/**/*,reports/allure-report/**', allowEmptyArchive: true
+                
                 publishHTML(target: [
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,

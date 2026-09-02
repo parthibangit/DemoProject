@@ -52,6 +52,7 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['html', {open: 'never'}],
+    ['junit', { outputFile: 'test-results/results.xml' }],
     ['allure-playwright', {
       resultsDir: 'reports/allure-results', // Folder where raw data is saved
       detail: true,                         // Captures step-by-step API actions
