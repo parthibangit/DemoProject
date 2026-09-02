@@ -4,13 +4,13 @@ import { StringUtils } from '../../src/utils/stringUtils.ts';
 test.describe.configure({mode: 'parallel'}); 
 
 test.use({
-  headless: false,
+  headless: true,
   ignoreHTTPSErrors: true,
   screenshot: 'only-on-failure',
   permissions:[]
 });
 
-test('Input fields test', {tag: "@inputs"}, async({ page }) => {
+test('Input fields test', {tag: "@smoke"}, async({ page }) => {
 
   const userFirstName: string = StringUtils.firstName();
 
@@ -27,7 +27,7 @@ test('Input fields test', {tag: "@inputs"}, async({ page }) => {
 
 });
 
-test('Checkbox and radio selection', async({ page }) => {
+test('Checkbox and radio selection @smoke', async({ page }) => {
 
   await page.goto('https://practice-automation.com/form-fields/');
 
@@ -63,7 +63,7 @@ test('Drop down selection', async({ page }) => {
 
 });
 
-test('Click operations', {tag : "@click"}, async({ page }) => {
+test('Click operations', {tag : "@smoke"}, async({ page }) => {
 
   await page.goto('https://practice-automation.com/click-events/');
 

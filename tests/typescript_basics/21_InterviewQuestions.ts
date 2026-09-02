@@ -246,3 +246,18 @@ function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): 
 
 }
 console.log('Same elements in both arrays are: ', compareTwoArrayToFindSameElements([10, 7, 6, 2, 4], [2, 4, 5, 2, 10]));
+
+function frequencyOfChar(value: string, checkChar: string): number {
+
+    // return value.split('').filter(char => char.includes(checkChar)).length;
+    let count: number = 0;
+
+    for(let char of value) {
+        if(char === checkChar) {
+            count++;
+        }
+    }
+    return count;
+
+}
+console.log('Given char occured in: ', frequencyOfChar('Parthiban', 'a'))

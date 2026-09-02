@@ -16,6 +16,19 @@
         "JIRA_API_TOKEN": "ATATT3xFfGF0k3r7kFNzFTW7T-KtNhV_IMHUxSq2_ZPOzME5vRtattF5EXsm3cpnQqAGnwA5XM3_AzOlATyNf5AJmghTwXAk33ZUAZoyxqf-OvHTwhEF1ep_MUxdsAdqPyBvtdw2WPvTiN5mWQsPfPvyVWjHwXMlabYDmJp50fMMMmfF6Cu5DVw=0EAF4E67",
         "JIRA_USER_EMAIL": "parthiban_subburam@epam.com"
       }
+    },
+    "jenkins": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "--yes",
+        "@kud/mcp-jenkins@latest"
+      ],
+      "env": {
+        "MCP_JENKINS_URL": "http://localhost:8080/",
+        "MCP_JENKINS_USER": "pjenkin",
+        "MCP_JENKINS_API_TOKEN": "1171c879cb9e76abe440eee9a2f3c10184"
+      }
     }
   },
   "inputs": []
