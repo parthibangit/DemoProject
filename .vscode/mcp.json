@@ -29,6 +29,10 @@
         "MCP_JENKINS_USER": "pjenkin",
         "MCP_JENKINS_API_TOKEN": "1171c879cb9e76abe440eee9a2f3c10184"
       }
+    },
+     "pdf-toolkit": {
+     "command": "npx",
+     "args": ["-y", "@aryanbv/pdf-toolkit-mcp"]
     }
   },
   "inputs": []

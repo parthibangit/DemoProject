@@ -1,6 +1,6 @@
 import {test, expect} from "@playwright/test"
 
-test('basic assertions', { tag: '@assert' }, async({ page }) => {
+test('basic assertions', { tag: '@smoke' }, async({ page }) => {
 
     await page.goto('https://practice-automation.com/form-fields/');
 
@@ -10,14 +10,14 @@ test('basic assertions', { tag: '@assert' }, async({ page }) => {
     await expect.soft(submitButton).toHaveText('Submit');
 });
 
-test('Verify the counts', async({ page }) => {
+test('Verify the counts @smoke', async({ page }) => {
 
     await page.goto('https://practice-automation.com/form-fields/');
 
     const favouriteDrinks = page.locator("//input[@type='checkbox']");
 
     try {
-        await expect(favouriteDrinks, 'Favourite drinks count does not matched... ').toHaveCount(5, {timeout: 3000});       
+        await expect(favouriteDrinks, 'Favourite drinks count does not matched... ').toHaveCount(10, {timeout: 3000});       
     }
     catch(error) {
         console.error((error as Error).stack);
