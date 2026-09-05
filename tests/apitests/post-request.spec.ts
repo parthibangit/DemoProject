@@ -9,7 +9,7 @@ import { createRecordPayload } from '../../src/utils/payloadFactoryUtils.ts';
 test.use({
 
     extraHTTPHeaders: {
-        'x-api-key': process.env.API_KEY || ' ',
+        'x-api-key': process.env.API_KEY!,
         'X-Reqres-Env': 'prod',
         'Content-Type': 'application/json'
     }

@@ -27,13 +27,12 @@ const clearDirectory = (dirPath: string) => {
   }
 };
 
-// Define the target paths for allure data
-const resultsDir = path.resolve(__dirname, 'reports/allure-results');
-const reportDir = path.resolve(__dirname, 'reports/allure-report');
+// Define the target report paths
+const paths = ['reports', 'blob-report', 'test-results']
+paths.forEach(path => {
+  if(!path.includes('tests')) clearDirectory(path);    
+})
 
-// Execute the cleanup routine before configuration initializes
-clearDirectory(resultsDir);
-clearDirectory(reportDir);
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -47,10 +46,11 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 1 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 3 : undefined,
+  workers: process.env.CI ? 3 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],
+    ['blob', {outputFile: `blob-report/blob-${Date.now()}.zip`}],
     ['html', {open: 'never'}],
     ['junit', { outputFile: 'test-results/results.xml' }],
     ['allure-playwright', {

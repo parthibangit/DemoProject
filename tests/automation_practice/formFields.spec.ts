@@ -121,12 +121,21 @@ test('Verify element presence, enabled, disabled, hidden, editable and checked s
   const isElementChecked = await page.getByText('Cat').isChecked();
 });
 
-test.skip('Key press events', async({page}) => {
+test('Key press events', async({page}) => {
+
+  await page.goto('https://practice-automation.com/click-events/');
+
+  // Focus the elemetn to click  
+  await page.getByText('Cat').focus();
 
   // Press using press()
   await page.getByText('Cat').press('Enter');
 
   // Press using keyboard
   await page.keyboard.press('PageDown');
+
+  // select all the elements using keyboard
+  await page.keyboard.press('Control+A');
+
 });
 

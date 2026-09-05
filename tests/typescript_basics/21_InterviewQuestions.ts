@@ -218,6 +218,8 @@ function checkIfElementPresentInArray(values: (string | number)[], checkValue: (
 }
 console.log('Is element present in array: ', checkIfElementPresentInArray(['a', 'b', 'c'], 'd'));
 
+// =============================================================================================================================
+
 function reverseAWordsInSentence(sentence: string): string {
 
     return sentence.split(' ').map(word => {
@@ -226,6 +228,8 @@ function reverseAWordsInSentence(sentence: string): string {
 }
 
 console.log('Reverse a sentence: ', reverseAWordsInSentence('This is Parthiban subburam'));
+
+// ================================================================================================================================
 
 function convertToCamelCase(value: string): string {
 
@@ -238,6 +242,8 @@ function convertToCamelCase(value: string): string {
 };
 console.log('Converted to camel case value is: ', convertToCamelCase('this is Parthiban subburam ...'));
 
+// ================================================================================================================================
+
 function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): number[] {
 
     // return array1.filter(value => array2.includes(value));
@@ -246,6 +252,8 @@ function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): 
 
 }
 console.log('Same elements in both arrays are: ', compareTwoArrayToFindSameElements([10, 7, 6, 2, 4], [2, 4, 5, 2, 10]));
+
+// ===============================================================================================================================
 
 function frequencyOfChar(value: string, checkChar: string): number {
 
@@ -261,3 +269,29 @@ function frequencyOfChar(value: string, checkChar: string): number {
 
 }
 console.log('Given char occured in: ', frequencyOfChar('Parthiban', 'a'))
+
+// ===============================================================================================================================
+
+function reverseAParticularWordFromSentence(sentence: string, reverseWord: string): string {
+
+   return sentence.split(' ').map(value => {
+       if(value === reverseWord) return value.split('').reverse().join('');
+       return value;
+   }).join(' ')
+
+}
+console.log('Result after reverse a particular word from sentence: ', reverseAParticularWordFromSentence('I am software tester', 'am'));
+
+// ===============================================================================================================================
+
+function reverseAWordsFromSentenceWithSpecialChar(sentence: string): string {
+
+   return sentence.split('#').map(value => {
+       if(value.length == 1) return value;
+       return value.split('').reverse().join('');
+   }).reverse().join(' ')
+
+}
+console.log('Result after reverse a particular word with special char: ', reverseAWordsFromSentenceWithSpecialChar('I#am#software#tester'));
+
+// ===============================================================================================================================

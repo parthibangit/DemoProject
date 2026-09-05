@@ -16,7 +16,7 @@ test.describe('Wait for URL, Load State, Selector, and navigation', () => {
     await page.waitForLoadState('load');
 
     // we can pass values as 'visible', 'hidden', 'attached' and  'detached'
-    await page.waitForSelector('name-input', {state:'visible'});
+    await page.waitForSelector('name-input', {state:'visible', timeout: 6000});
 
     // we can pass values as 'load', 'domcontentloaded', and 'networkidle'
     // await page.waitForNavigation('load');
