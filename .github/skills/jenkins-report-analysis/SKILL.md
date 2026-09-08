@@ -81,5 +81,6 @@ Embed a `<style>` block in the document `<head>` with these characteristics:
 - Light zebra striping for table body rows, such as `#f9f9f9`
 - Dark table-header cells with white text
 - A red text or red pill badge for `FAIL`
+- If the suggestion contains more than one sentence, each subsequent sentence should start on a new line with `- ` and a space between sentences.
 
 The generated document must contain one clear report table and must remain valid even when XML details contain brackets, code snippets, or raw log symbols.
