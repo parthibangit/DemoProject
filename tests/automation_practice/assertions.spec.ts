@@ -43,7 +43,7 @@ test('basic assertion types', { tag: '@assert' }, async({ page }) => {
 
     // has right items in the right order.
     await expect(submitButton, 'Submit button is not enabled in web page...').toHaveText(['Submit', 'Create', 'Touch']);
-    await expect(submitButton, 'Submit button is not enabled in web page...').toHaveText('Submit');
+    await expect(submitButton, 'Submit button is not enabled in web page...').toHaveText('Submit', {ignoreCase: true});
 
     // has some items in the right order
     await expect(submitButton, 'Submit button is not enabled in web page...').toContainText(['Submit', 'Touch']);

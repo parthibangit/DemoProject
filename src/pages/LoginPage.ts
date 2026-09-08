@@ -2,10 +2,10 @@ import { test, expect, Page, Locator } from '@playwright/test';
 
 export class LoginPage {
 
-    readonly page: Page;
-    readonly emailAddress: Locator
-    readonly password: Locator
-    readonly loginButton: Locator
+    private readonly page: Page;
+    private readonly emailAddress: Locator
+    private readonly password: Locator
+    private readonly loginButton: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -18,7 +18,7 @@ export class LoginPage {
         await this.page.goto(url);
     }
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string): Promise<void> {
         // If test step is declared, it will shown in html report.
         return test.step('Log into application by providing login credentials', async () => {
             await this.emailAddress.fill(email);

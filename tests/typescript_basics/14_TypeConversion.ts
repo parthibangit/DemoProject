@@ -38,12 +38,25 @@ console.log(userName === lastName);        // false - types are matching but val
 
 
 // Objects stored by reference in heap memory - obj1 and obj2 point to different memory addresses
-let obj1 = {name: 'Parthiban', age: 30};  // obj1 reference -> heap memory address #1
-let obj2 = {name: 'Parthiban', age: 30};  // obj2 reference -> heap memory address #2
+let obj1 = {name: 'Parthiban', age: 30};   // obj1 reference -> heap memory address #1
+let obj2 = {name: 'Parthiban', age: 30};   // obj2 reference -> heap memory address #2
 
-console.log(obj1 === obj2);                // false - values and types are matching but objects stored by reference(diff instance)
+console.log(obj1 === obj2);                // false => values and types are matching but objects stored by reference(diff instance)
 
 let obj3 = obj2;
-console.log(obj3 === obj2);                // true -  values and types are matching and sharing same object in the memory
+console.log(obj3 === obj2);                // true => values and types are matching and sharing same object in the memory
 
 // =================================================================================================================================
+
+let numbers: number[] = [10, 20, 30, 40]
+let slicedarray = numbers.slice();
+console.log(numbers === slicedarray)       // false => values and types are same but referecing the diffrence memory address
+
+let beforeSort: number[] = [10, 20, 30, 40]
+let afterSort = beforeSort.sort();
+console.log(beforeSort === afterSort)      // true =>  values and types are matching and sharing same object in the memory
+
+let values = [...numbers]
+console.log(numbers === values)            // false => values and types are same but referecing the diffrence memory address      
+
+// ==========================================================================================================================

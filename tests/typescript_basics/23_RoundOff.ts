@@ -12,5 +12,5 @@ console.log(formatted)                        // 10.26
 console.log(formattedOperator)                // 10.26
 
 // decimal formatter
-const decimalFormatter = new Intl.NumberFormat('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const decimalFormatter = new Intl.NumberFormat('en-IN', {minimumFractionDigits: 0, maximumFractionDigits: 2});
 console.log(decimalFormatter.format(2500045));

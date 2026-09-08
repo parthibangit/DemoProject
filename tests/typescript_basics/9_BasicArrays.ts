@@ -2,6 +2,8 @@
 /* basic array operation */
 // =====================
 
+import { number } from "zod";
+
 let cities: string[] = ['Chennai', 'Coimbatore', 'Bangalore', 'Mumbai', 'Coimbatore'];
 var secondCity = cities[1];                                       // fetch element based on index
 cities.push('Kolkata');                                           // add new values at the end of existing array
@@ -24,8 +26,10 @@ let reversedArray: string[] = cities.reverse();
 // =================
 
 let numbers: readonly number[] = [10, 20, 30, 40, 50];
-// numbers[1] = 100;      cannnot add and modify the array as it is readonly
+// numbers[1] = 100;          // cannnot add and modify the array as it is readonly
 // numbers.push(70);
+let copyArray = [...numbers]
+copyArray.push(15);           // Can access add, modify and remove the element
 
 
 /* multitype values array */
@@ -39,8 +43,9 @@ console.log(values);                                                    // origi
 /* array using constructor */
 // =========================
 
-let emptyArray = new Array<(number | string)>(20, 'Parthiban', 222);
+let unionArray = new Array<(number | string)>(20, 'Parthiban', 222);
 let fixedArray = new Array<number>(5);                                 // Empty array with fixed size
+fixedArray.push(100);
 let scores = new Array<number>(5, 6, 7);
 let booleanValues = new Array(scores.length).fill(true);
 
