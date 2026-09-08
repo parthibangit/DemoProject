@@ -36,12 +36,15 @@ pipeline {
     environment {
         PLAYWRIGHT_BROWSERS_PATH = "${WORKSPACE}/.cache/ms-playwright"
 
-        // // Non-sensitive configuration variables
-        // TEST_URL = 'https://example.com'
-        // TEST_USER = 'jenkins_automation_user'
-
+        // Non-sensitive configuration variables
+        POP_UP_URL = 'https://practice-automation.com/popups/'
+        TEST_URL = 'https://automationexercise.com/login'
+        EMAIL = 'sarathipartha04@gmail.com'
+        PASSWORD = 'password'
+        DEMO_VALUE = 'this is uat environment'
+    
         // // Securely pulling sensitive passwords from Jenkins Credentials Provider
-        // TEST_PASSWORD = credentials('TEST_PASSWORD')
+        API_KEY = credentials('API_KEY')
     }
 
     stages {
