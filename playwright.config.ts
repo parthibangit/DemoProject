@@ -28,7 +28,7 @@ const clearDirectory = (dirPath: string) => {
 };
 
 // Define the target report paths
-const paths: readonly string[] = ['reports', 'blob-report', 'test-results', 'downloads']
+const paths: readonly string[] = ['reports', 'blob-report', 'downloads']
 paths.forEach(folderPath => {
   if(!folderPath.includes('tests')) clearDirectory(folderPath);    
 })
