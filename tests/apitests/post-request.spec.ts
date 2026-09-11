@@ -38,6 +38,9 @@ test('Create a record using json file and fetch it again', { annotation: { type:
     });
 
     // Deserialize into your TypeScript Type
+    // This is only a compile-time type annotation. `response.json()` returns parsed
+    // JavaScript data, and TypeScript types are erased at runtime, so mismatches do
+    // not throw here. Use a runtime validator such as Zod to validate the response.
     const getRecordResponseBody: CreateRecordResponseType = await getRecordResponse.json();
     console.log('response body is: ', JSON.stringify(getRecordResponseBody, null, 4));
     expect(getRecordResponseBody.data.id).toBe(recordId);
