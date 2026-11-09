@@ -36,11 +36,14 @@ test('Built-in Selectors @built', async ({ page }) => {
 
   await page.goto('https://practice-automation.com/form-fields/');
 
-  // It is useful when we have to element which has 'label' tag
-  await page.getByLabel('Password').fill('Test123')
+  // It is useful when we have to locate element based on role
+  await page.getByRole('checkbox', { name: 'Water' }).click();
 
   // It is useful when we have to element which has 'data-testid' attribute
   await page.getByTestId('email').fill('test123@gmail.com')
+
+  // It is useful when we have to element which has 'label' tag
+  await page.getByLabel('Password').fill('Test123')
 
   // It is useful when we have to element which has 'placeholder' attribute
   await page.getByPlaceholder('Enter message here').fill('This is for testing purpose...');
@@ -53,9 +56,6 @@ test('Built-in Selectors @built', async ({ page }) => {
 
   // It is useful when we have to locate image which has 'alt' attribute
   await page.getByAltText('automateNow Logo');
-
-  // It is useful when we have to locate element based on role
-  await page.getByRole('checkbox', { name: 'Water' }).click();
 
 });
 
@@ -76,9 +76,9 @@ test('Loop through each element @loop', async ({ page }) => {
   const totalElements = page.locator('//label[contains(@for, "color")]');
 
   // Iterate the elements and click the element using for loop.
-  const arrayOfElements = await totalElements.all();
+  const arrayOfElementsLocator = await totalElements.all();
 
-  for (let element of arrayOfElements) {
+  for (let element of arrayOfElementsLocator) {
     let text = await element.textContent()
     if (text === 'Blue') {
       await element.click();

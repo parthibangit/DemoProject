@@ -1,11 +1,11 @@
 class MethodOverloading {
 
     // Multiple method signatures
-    fecthCapital(cityName: string): string;
-    fecthCapital(cityName: string, stateName?: string): string;
+    fetchCapital(cityName: string): string;
+    fetchCapital(cityName: string, stateName?: string): string;
 
     // Implementation of those multiple signatures to achieve method overloading
-    fecthCapital(cityName: string, stateName?: string): string {
+    fetchCapital(cityName: string, stateName?: string): string {
         if (stateName == undefined) {
             return `Capital name is ${cityName}`
         }
@@ -30,7 +30,7 @@ class MethodOverloading {
 }
 
 const methodOverloading = new MethodOverloading();
-console.log(methodOverloading.fecthCapital('Chennai', 'Tamil Nadu'));
+console.log(methodOverloading.fetchCapital('Chennai', 'Tamil Nadu'));
 
 
 /* overriding conept */

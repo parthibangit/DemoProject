@@ -19,7 +19,7 @@ test('Input fields test', {tag: "@smoke"}, async({ page }) => {
   //Fill the input field - fill method automatically clear the input field
   await page.getByTestId('name-input').fill(userFirstName);
 
-    // Clear the input field before fill
+  // Clear the input field before fill
   await page.getByTestId('name-input').clear();
 
   // type the value one by one as emulating user typing - it will not clear the field automatically
@@ -55,11 +55,17 @@ test('Drop down selection', async({ page }) => {
   // Select the value by value 
   await page.getByTestId('automation').selectOption({value: 'yes'});
 
-    // Select the value by index 
+  // Select the value by index 
   await page.getByTestId('automation').selectOption({index: 0});
+
+  // De-Select the value by index 
+  await page.getByTestId('automation').selectOption('');
 
   // Select multi values in drop down
   await page.getByTestId('automation').selectOption(['Yes', 'No'])
+
+  // De-Select all selected values in drop down
+  await page.getByTestId('automation').selectOption([])
 
 });
 
@@ -125,7 +131,7 @@ test('Key press events', async({page}) => {
 
   await page.goto('https://practice-automation.com/click-events/');
 
-  // Focus the elemetn to click  
+  // Focus the element to click  
   await page.getByText('Cat').focus();
 
   // Press using press()

@@ -4,7 +4,7 @@ test.describe('Login to application - Postive flow', async() => {
 
    test('Basic test', async() => {
        const browser = await chromium.launch({headless: true, channel: "chrome", slowMo: 2000});
-    //    const browser = await webkit.launch();
+      //  const browser = await webkit.launch();
        console.log('Browser name is: ', browser.browserType().name());
        console.log('Browser version is: ', browser.version());
        const context = await browser.newContext();

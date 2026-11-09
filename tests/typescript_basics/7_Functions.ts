@@ -25,7 +25,7 @@ function throwErrorMsg(errorMsg: string): never {                       // use n
 }
 // throwErrorMsg('Button is not enabled...')
 
-function anyReturnType(): any {                       // Totaly diable the type safety
+function anyReturnType(): any {                       // Totally disable the type safety
                                                       // can access any property but it will not show compile time error
     return { 
         name: 'Sarathi', 
@@ -42,7 +42,7 @@ console.log(ref.fetchNames());                         // At runtime, it will sh
 
 // Arrow functions
 
- // If the function perform only one operation, we can omit curly branch and return keyword
+ // If the function perform only one operation, we can omit curly braces and return keyword
 
 const prepareScore = (initialScore: number, finalScore: number): number => initialScore + finalScore;
 console.log(prepareScore(35, 45));

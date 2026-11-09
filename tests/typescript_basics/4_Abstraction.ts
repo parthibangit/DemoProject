@@ -18,6 +18,10 @@ abstract class UserProfile {
         return this.subRole;
     };
 
+    public fetchUserInfo(): string {
+        return `user name is '${this.name}' and role is '${this.role}'`;
+    }
+
     abstract printName(): void;                               // Must be implemented in child class
 };
 
@@ -35,3 +39,4 @@ class ImplementAbstract extends UserProfile {
 
 const obj = new ImplementAbstract();
 obj.printName();
+console.log(obj.fetchUserInfo());
