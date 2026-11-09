@@ -4,7 +4,7 @@ class Constructors {
     age: number;
     section: string;
 
-    /* type script cannot have multiple constructore implementation but we can declare
+    /* type script cannot have multiple constructor implementation but we can declare
        and single constructor implementation handles all variants */
 
     /* Overload signatures */

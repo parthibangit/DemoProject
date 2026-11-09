@@ -51,7 +51,12 @@ class ImplementInterface implements basics, advanced {
     fetchCareer(): string {
         return `Career is ${this.career}`
     }
+
+    fetchSubRole(): string {
+        return `Sub role is '${this.subRole}'`
+    }
 };
 
 const obj = new ImplementInterface('Parthiban', 'QA');
 console.log(obj.fetchName());
+console.log(obj.fetchSubRole());

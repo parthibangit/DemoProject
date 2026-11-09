@@ -25,9 +25,17 @@ test('Send get request to fetch product list', async ({ request }) => {
     expect(productListResponse.status()).toBe(200);
     expect(productListResponse.status()).toBeTruthy(); // shortcut to test the status code
     expect(productListResponse.statusText()).toBe('OK');
+
+    // verify the response time
+    const timing = productListResponse.timing();    // return the response object
+    // Time from sending the request until the complete response is received.
+    const responseTime = timing.responseEnd - timing.requestStart;
+    console.log('Response time is : ', responseTime);
+    expect(responseTime).toBeLessThanOrEqual(4000);
+
 });
 
-test.only('Send get request and parsing the response body', async ({ request }) => {
+test('Send get request and parsing the response body', async ({ request }) => {
 
     const productListResponse = await request.get('https://automationexercise.com/api/productsList')
 
@@ -47,6 +55,7 @@ test.only('Send get request and parsing the response body', async ({ request }) 
     // verify the response body values
     expect(response.responseCode).toBe(200);
     expect(response).toHaveProperty('responseCode', 200);
+    expect(response.products[0]).not.toHaveProperty('name');
     expect(response).toHaveProperty('products[0].category.category', 'Tops');   // to check nested properties, use . operator
     // expect(productListResponse).toBe('OK');
 });

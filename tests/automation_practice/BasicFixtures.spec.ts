@@ -4,12 +4,15 @@ test.describe('Login to application - Postive flow', async() => {
 
    test('Basic test', async() => {
        const browser = await chromium.launch({headless: true, channel: "chrome", slowMo: 2000});
-    //    const browser = await webkit.launch();
+      //  const browser = await webkit.launch();
        console.log('Browser name is: ', browser.browserType().name());
        console.log('Browser version is: ', browser.version());
        const context = await browser.newContext();
        const page = await context.newPage();
        await page.goto('https://practice-automation.com/form-fields/');
+       await page.close();
+       await context.close();
+       await browser.close();
    })
 
     test('Basic test 2', async({browser: Browser, context: BrowserContext, page: Page, browserName, isMobile}) => {
@@ -22,10 +25,18 @@ test.describe('Login to application - Postive flow', async() => {
 
    test('Basic test 3', async() => {
        const browser = await chromium.launch({headless: false, channel: "chrome", slowMo: 2000});
-       const contextOne = await browser.newContext();
+       const contextOne = await browser.newContext({
+          locale: 'fr-FR',
+          permissions: ['geolocation'],
+          timezoneId: 'Europe/Paris'
+       });
        await contextOne.storageState({path: ''});
 
-       const contextTwo = await browser.newContext();
+       const contextTwo = await browser.newContext({
+        locale: 'in-IN',
+        permissions: ['geolocation'],
+        timezoneId: 'India/Chennai'
+       });
        await contextTwo.storageState({path: ''});
 
        const pageOne = await contextOne.newPage();

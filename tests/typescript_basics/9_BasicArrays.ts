@@ -2,8 +2,6 @@
 /* basic array operation */
 // =====================
 
-import { number } from "zod";
-
 let cities: string[] = ['Chennai', 'Coimbatore', 'Bangalore', 'Mumbai', 'Coimbatore'];
 var secondCity = cities[1];                                       // fetch element based on index
 cities.push('Kolkata');                                           // add new values at the end of existing array
