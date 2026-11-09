@@ -1,5 +1,4 @@
-import {test, expect} from "@playwright/test"
-import path from "node:path";
+import {test} from "@playwright/test"
 
 test('Upload files if we have type as file', {tag: "@upload"}, async({ page }) => {
 

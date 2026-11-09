@@ -15,7 +15,7 @@ class Child {
     /* can call only inside the static function */            
     static location: string = 'Chennai';  
 
-    /* If property has readonly access modifier, then we cannot redeclare or reasign value outside the constructor*/
+    /* If property has readonly access modifier, then we cannot redeclare or reassign value outside the constructor*/
     readonly native: string;            
 
 

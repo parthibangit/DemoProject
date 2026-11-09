@@ -13,6 +13,7 @@ test('scroll to element automatically', async({page}) => {
 test('scroll to element if needed', async({page}) => {
 
     await page.getByTestId('submit-btn').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(5000);
 });
 
 test.afterEach( async( {page} ) => {

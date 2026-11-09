@@ -4,13 +4,13 @@ import { StringUtils } from '../../src/utils/stringUtils.ts';
 test.describe.configure({mode: 'parallel'}); 
 
 test.use({
-  headless: false,
+  headless: true,
   ignoreHTTPSErrors: true,
   screenshot: 'only-on-failure',
   permissions:[]
 });
 
-test('Input fields test', {tag: "@inputs"}, async({ page }) => {
+test('Input fields test', {tag: "@smoke"}, async({ page }) => {
 
   const userFirstName: string = StringUtils.firstName();
 
@@ -19,7 +19,7 @@ test('Input fields test', {tag: "@inputs"}, async({ page }) => {
   //Fill the input field - fill method automatically clear the input field
   await page.getByTestId('name-input').fill(userFirstName);
 
-    // Clear the input field before fill
+  // Clear the input field before fill
   await page.getByTestId('name-input').clear();
 
   // type the value one by one as emulating user typing - it will not clear the field automatically
@@ -27,7 +27,7 @@ test('Input fields test', {tag: "@inputs"}, async({ page }) => {
 
 });
 
-test('Checkbox and radio selection', async({ page }) => {
+test('Checkbox and radio selection @smoke', async({ page }) => {
 
   await page.goto('https://practice-automation.com/form-fields/');
 
@@ -55,15 +55,21 @@ test('Drop down selection', async({ page }) => {
   // Select the value by value 
   await page.getByTestId('automation').selectOption({value: 'yes'});
 
-    // Select the value by index 
+  // Select the value by index 
   await page.getByTestId('automation').selectOption({index: 0});
+
+  // De-Select the value by index 
+  await page.getByTestId('automation').selectOption('');
 
   // Select multi values in drop down
   await page.getByTestId('automation').selectOption(['Yes', 'No'])
 
+  // De-Select all selected values in drop down
+  await page.getByTestId('automation').selectOption([])
+
 });
 
-test('Click operations', {tag : "@click"}, async({ page }) => {
+test('Click operations', {tag : "@smoke"}, async({ page }) => {
 
   await page.goto('https://practice-automation.com/click-events/');
 
@@ -121,12 +127,21 @@ test('Verify element presence, enabled, disabled, hidden, editable and checked s
   const isElementChecked = await page.getByText('Cat').isChecked();
 });
 
-test.skip('Key press events', async({page}) => {
+test('Key press events', async({page}) => {
+
+  await page.goto('https://practice-automation.com/click-events/');
+
+  // Focus the element to click  
+  await page.getByText('Cat').focus();
 
   // Press using press()
   await page.getByText('Cat').press('Enter');
 
   // Press using keyboard
   await page.keyboard.press('PageDown');
+
+  // select all the elements using keyboard
+  await page.keyboard.press('Control+A');
+
 });
 

@@ -111,7 +111,7 @@ console.log('Available product details are: ', filterTheValue('Samsung', product
 
 function removeDuplicateValues(...values: string[]): Set<string> {
 
-    // let uniqueValues = [...new Set(array)];
+    // let uniqueValues = [...new Set(values)];
     let uniqueValues = new Set(values)
     return uniqueValues;
 };
@@ -218,6 +218,8 @@ function checkIfElementPresentInArray(values: (string | number)[], checkValue: (
 }
 console.log('Is element present in array: ', checkIfElementPresentInArray(['a', 'b', 'c'], 'd'));
 
+// =============================================================================================================================
+
 function reverseAWordsInSentence(sentence: string): string {
 
     return sentence.split(' ').map(word => {
@@ -227,22 +229,79 @@ function reverseAWordsInSentence(sentence: string): string {
 
 console.log('Reverse a sentence: ', reverseAWordsInSentence('This is Parthiban subburam'));
 
+// ================================================================================================================================
+
 function convertToCamelCase(value: string): string {
 
     return value.split(' ')
         .map(word => {
             if (word.charAt(0) === word.charAt(0).toUpperCase()) return word;
-            return word.substring(0, 1).toUpperCase().concat(word.substring(1))
+            return word.charAt(0).toUpperCase().concat(word.substring(1))
         })
         .join(' ')
 };
 console.log('Converted to camel case value is: ', convertToCamelCase('this is Parthiban subburam ...'));
 
-function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): number[] {
+// ================================================================================================================================
 
+function compareTwoArrayToFindSameElements(array1: number[], array2: number[]): number[] | number {
+
+    if(array1.length !== array2.length) return 0;
     // return array1.filter(value => array2.includes(value));
     const values = new Set<number>(array2);
     return array1.filter(value => values.has(value));
 
 }
 console.log('Same elements in both arrays are: ', compareTwoArrayToFindSameElements([10, 7, 6, 2, 4], [2, 4, 5, 2, 10]));
+
+// ===============================================================================================================================
+
+function frequencyOfChar(value: string, checkChar: string): number {
+
+    // return value.split('').filter(char => char.includes(checkChar)).length;
+    let count: number = 0;
+
+    for(let char of value) {
+        if(char === checkChar) {
+            count++;
+        }
+    }
+    return count;
+
+}
+console.log('Given char occured in: ', frequencyOfChar('Parthiban', 'a'))
+
+// ===============================================================================================================================
+
+function reverseAParticularWordFromSentence(sentence: string, reverseWord: string): string {
+
+   return sentence.split(' ').map(value => {
+       if(value === reverseWord) return value.split('').reverse().join('');
+       return value;
+   }).join(' ')
+
+}
+console.log('Result after reverse a particular word from sentence: ', reverseAParticularWordFromSentence('I am software tester', 'am'));
+
+// ===============================================================================================================================
+
+function reverseAWordsFromSentenceWithSpecialChar(sentence: string): string {
+
+   return sentence.split('#').map(value => {
+       if(value.length == 1) return '#'+value;
+       return '#'+value.split('').reverse().join('');
+   }).reverse().join(' ')
+
+}
+console.log('Result after reverse a particular word with special char: ', reverseAWordsFromSentenceWithSpecialChar('I#am#software#tester'));
+
+// ===============================================================================================================================
+ function findFirstOccurenceInGivenString(hayStack: string, needle: string): number {
+
+    console.log(hayStack.split(needle));
+    const valueArray = hayStack.split(needle).filter(value => value !== needle);
+    if(valueArray.length <=0) return -1;
+    if (valueArray.join('') === hayStack) return -1;
+    return 0;   
+ }
+ console.log('First occurence occurs at the index of: ', findFirstOccurenceInGivenString('SadbutSad', 'but'));

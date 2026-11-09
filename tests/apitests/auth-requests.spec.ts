@@ -1,5 +1,11 @@
 import { test } from '@playwright/test';
 
+test.describe.configure({
+    mode: 'default',
+    retries: 2,
+    timeout: 4000
+});
+
 /* This will applicable to all the test request in this file only */
 test.use({
 

@@ -13,7 +13,8 @@ class CheckError {
 
     checkAge(): void {
     if(this.age < 15) {
-       throw new CustomError('Age is not matched...'); 
+       throw new CustomError('Age is not matched...');
+    //    throw new RangeError('Age is not matched...'); 
       }
     };
 };
@@ -46,12 +47,12 @@ try {
   throw new Error('This method has a problem')
 }
 
-catch (error) {                                   // If the error is unknows use conditions to check the type for safe
+catch (error) {                                   // If the error is unknown use conditions to check the type for safe
 
     console.error((error as Error).message);      // Result - This method has a problem
     console.error((error as Error).stack);        // Print entrie error message with lines
 }
 
 finally {
-    console.log('This block run always regardless of error thrown or not');
+    console.log('================== This block run always regardless of error thrown or not ===========================');
 }

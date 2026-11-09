@@ -2,7 +2,7 @@ import {test} from "@playwright/test";
 
 test.use({
 
-  screenshot: 'on-first-failure',
+  screenshot: 'only-on-failure',
   video: 'retain-on-failure'
 })
 

@@ -1,6 +1,15 @@
 pipeline {
     agent any
 
+    // MINUTE (0-59)  HOUR (0-23)  DOM (1-31)  MONTH (1-12)  DOW (0-7)
+    // DOM: Day of Month
+    // DOW: Day of Week (0 and 7 both represent Sunday)
+    
+    // Examples:
+    // Every Monday at 8:00 AM: 0 8 * * 1
+    // Every 15 minutes: H/15 * * * *
+    // cron('TZ=America/New_York 0 14 * * *') // Triggers daily at 2:00 PM EST
+
     // triggers {
     //     cron('H * * * *')
     // }
@@ -36,12 +45,15 @@ pipeline {
     environment {
         PLAYWRIGHT_BROWSERS_PATH = "${WORKSPACE}/.cache/ms-playwright"
 
-        // // Non-sensitive configuration variables
-        // TEST_URL = 'https://example.com'
-        // TEST_USER = 'jenkins_automation_user'
-
+        // Non-sensitive configuration variables
+        POP_UP_URL = 'https://practice-automation.com/popups/'
+        TEST_URL = 'https://automationexercise.com/login'
+        EMAIL = 'sarathipartha04@gmail.com'
+        PASSWORD = 'password'
+        DEMO_VALUE = 'this is uat environment'
+    
         // // Securely pulling sensitive passwords from Jenkins Credentials Provider
-        // TEST_PASSWORD = credentials('TEST_PASSWORD')
+        API_KEY = credentials('API_KEY')
     }
 
     stages {
@@ -109,7 +121,13 @@ pipeline {
                     currentBuild.result = 'UNSTABLE'
                 }
 
-                archiveArtifacts artifacts: 'reports/allure-report/**', allowEmptyArchive: true
+                junit(
+                    testResults: 'test-results/results.xml',
+                    allowEmptyResults: false
+                )
+
+                archiveArtifacts artifacts: 'test-results/**/*,reports/allure-report/**', allowEmptyArchive: true
+                
                 publishHTML(target: [
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,

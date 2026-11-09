@@ -25,8 +25,8 @@ test('Handle the "new window / tab" and switch back to parent tab', async({page}
         page.locator("//b[text()='New Window']").click(),
     ]);
 
-
-    await newTab.waitForLoadState();
+    // we can pass values as 'load', 'domcontentloaded', and 'networkidle'
+    await newTab.waitForLoadState('domcontentloaded');
     const newWindowTitle = await newTab.locator("//h2[@class='wp-block-heading']").textContent();
     console.log('Title is: ' + newWindowTitle);
 
